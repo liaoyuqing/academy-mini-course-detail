@@ -130,18 +130,15 @@ def test_ac1_company_card_count_matches_true_instructors(client):
 
 
 def test_company_card_payload_excludes_contact_fields(client):
+    """期望值来自 tests/fixtures/instructor_card_1918.yaml，不是硬编码常量。"""
+    cases = _load_yaml("instructor_card_1918.yaml")
+    shown = next(item for item in cases if item["show_company_card"])
     body = client.get(_url()).json()
     card = next(item for item in body["instructors"] if item["show_company_card"])["company_card"]
     assert set(card) == {"short_name", "industry", "ability_tags", "summary"}
-    assert card["short_name"] == "云枢科技"
-    assert card["industry"] == "工业软件"
-    assert card["ability_tags"] == [
-        "MES 实施",
-        "产线数字化",
-        "数据采集",
-        "工艺建模",
-        "培训交付",
-    ]
+    assert card["short_name"] == shown["expected_short_name"]
+    assert card["industry"] == shown["raw"]["industry"]
+    assert card["ability_tags"] == shown["expected_tags"]
     assert len(card["ability_tags"]) <= 5
     dumped = json.dumps(card, ensure_ascii=False)
     for forbidden in ("contact", "phone", "email", "不应出现的联系人", "example@example.invalid"):
@@ -163,13 +160,17 @@ def test_ac1_false_without_crm_company_id_still_absent(client_factory, db_sessio
 # AC2 匿名评价不出现评价人姓名与 contact_id
 # ---------------------------------------------------------------------------
 def test_ac2_anonymous_review_hides_name_and_contact_id(client):
+    """期望值与禁用键来自 tests/fixtures/review_anon_1918.yaml。"""
+    cases = _load_yaml("review_anon_1918.yaml")
+    anon_case = next(item for item in cases if item["case"] == "anonymous_only")
     recent = client.get(_url()).json()["review_summary"]["recent"]
-    anon = [item for item in recent if item["author_name"] == "匿名学员"]
+    anon = [item for item in recent if item["author_name"] == anon_case["expected_display_name"]]
     assert anon, "最近 3 条里应包含匿名评价"
     for item in anon:
         assert set(item) == {"content", "rating", "created_at", "author_name"}
-        assert "contact_id" not in item
-        assert "真实姓名不应泄露" not in json.dumps(item, ensure_ascii=False)
+        for forbidden in anon_case["forbidden_keys"]:
+            assert forbidden not in item
+        assert anon_case["author_name"] not in json.dumps(item, ensure_ascii=False)
 
 
 def test_ac2_named_review_keeps_display_name(client):
