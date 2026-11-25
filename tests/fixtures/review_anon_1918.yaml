@@ -1,0 +1,19 @@
+# 评价摘要用例数据：anonymous 为 true 时响应不得出现真实姓名与 contact_id。
+- case: anonymous_only
+  anonymous: true
+  author_name: 王工
+  contact_id: 44444444-4444-4444-8444-444444444444
+  expected_display_name: 匿名学员
+  forbidden_keys: [contact_id, author_real_name, contact_phone]
+- case: named_only
+  anonymous: false
+  author_name: 赵工
+  contact_id: 55555555-5555-4555-8555-555555555555
+  expected_display_name: 赵工
+  forbidden_keys: [contact_id, contact_phone]
+- case: mixed
+  anonymous: true
+  author_name: 钱工
+  contact_id: 66666666-6666-4666-8666-666666666666
+  expected_display_name: 匿名学员
+  forbidden_keys: [contact_id, author_real_name, contact_phone]

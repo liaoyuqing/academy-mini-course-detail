@@ -1,0 +1,263 @@
+### AC1/AC2/AC3 member course detail
+GET /api/mini/academy/courses/00000000-0000-0000-0000-0000000003e9   (X-Mini-Token: demo-member-token)
+HTTP 200
+{
+  "course_id": "00000000-0000-0000-0000-0000000003e9",
+  "title": "制造业产线数字化实战",
+  "subtitle": "从设备联网到工艺闭环",
+  "category": "manufacturing",
+  "intro": "面向制造企业数字化负责人，六周完成一条产线的数据闭环。",
+  "outline": [
+    "第 1 周 设备联网与数据采集",
+    "第 2 周 工艺参数建模",
+    "第 3 周 OEE 与损失分析"
+  ],
+  "outcomes": [
+    "能独立规划一条产线的采集点位",
+    "能读懂 OEE 报表并定位损失"
+  ],
+  "cover_url": "https://cdn.example.invalid/covers/manufacturing-101.png",
+  "fee_mode": "entitlement",
+  "sessions": [
+    {
+      "session_id": "00000000-0000-0000-0000-000000000834",
+      "label": "第 3 期（下午班）",
+      "start_at": "2026-11-28T03:07:55Z",
+      "end_at": "2026-11-28T06:07:55Z",
+      "room_name": "A-1 培训室",
+      "seats_remaining": 18,
+      "waitlist_count": 2,
+      "signup_state": "can_signup"
+    },
+    {
+      "session_id": "00000000-0000-0000-0000-000000000835",
+      "label": "第 3 期（周末班）",
+      "start_at": "2026-12-01T03:07:55Z",
+      "end_at": "2026-12-01T06:07:55Z",
+      "room_name": "A-2 培训室",
+      "seats_remaining": 15,
+      "waitlist_count": 0,
+      "signup_state": "can_signup"
+    },
+    {
+      "session_id": "00000000-0000-0000-0000-000000000836",
+      "label": "第 4 期（晚班）",
+      "start_at": "2026-12-05T03:07:55Z",
+      "end_at": "2026-12-05T06:07:55Z",
+      "room_name": "A-3 培训室",
+      "seats_remaining": 0,
+      "waitlist_count": 7,
+      "signup_state": "can_signup"
+    }
+  ],
+  "instructors": [
+    {
+      "instructor_id": "00000000-0000-0000-0000-000000000bb9",
+      "display_name": "陈砚舟",
+      "headline": "产线数字化顾问",
+      "bio": "主导过 20 条产线的数据采集改造。",
+      "avatar_url": "https://cdn.example.invalid/avatars/3001.png",
+      "role": "instructor",
+      "show_company_card": true,
+      "company_card": {
+        "short_name": "云枢科技",
+        "industry": "工业软件",
+        "ability_tags": [
+          "MES 实施",
+          "产线数字化",
+          "数据采集",
+          "工艺建模",
+          "培训交付"
+        ],
+        "summary": "为离散制造企业提供产线数字化改造与工艺建模服务。"
+      }
+    },
+    {
+      "instructor_id": "00000000-0000-0000-0000-000000000bba",
+      "display_name": "林知遥",
+      "headline": "精益生产讲师",
+      "bio": "十年精益改善与班组建设经验。",
+      "avatar_url": "https://cdn.example.invalid/avatars/3002.png",
+      "role": "guest",
+      "show_company_card": false
+    }
+  ],
+  "review_summary": {
+    "visible_count": 4,
+    "overall_avg": 4.5,
+    "avg_content": 4.5,
+    "avg_instructor": 4.5,
+    "avg_service": 3.5,
+    "recent": [
+      {
+        "content": "课程节奏紧凑，采集点位那节课直接给了清单模板。",
+        "rating": 5,
+        "created_at": "2026-11-24T03:07:55Z",
+        "author_name": "匿名学员"
+      },
+      {
+        "content": "老师回答很细，晚班时间对上班族友好。",
+        "rating": 4,
+        "created_at": "2026-11-23T03:07:55Z",
+        "author_name": "王工"
+      },
+      {
+        "content": "把自家产线的报表带过去，现场就改出来了。",
+        "rating": 5,
+        "created_at": "2026-11-22T03:07:55Z",
+        "author_name": "匿名学员"
+      }
+    ]
+  },
+  "remaining": 128000
+}
+
+### guest (权益余额退化为 0)
+GET /api/mini/academy/courses/00000000-0000-0000-0000-0000000003e9   (no token)
+HTTP 200
+{
+  "course_id": "00000000-0000-0000-0000-0000000003e9",
+  "title": "制造业产线数字化实战",
+  "subtitle": "从设备联网到工艺闭环",
+  "category": "manufacturing",
+  "intro": "面向制造企业数字化负责人，六周完成一条产线的数据闭环。",
+  "outline": [
+    "第 1 周 设备联网与数据采集",
+    "第 2 周 工艺参数建模",
+    "第 3 周 OEE 与损失分析"
+  ],
+  "outcomes": [
+    "能独立规划一条产线的采集点位",
+    "能读懂 OEE 报表并定位损失"
+  ],
+  "cover_url": "https://cdn.example.invalid/covers/manufacturing-101.png",
+  "fee_mode": "entitlement",
+  "sessions": [
+    {
+      "session_id": "00000000-0000-0000-0000-000000000834",
+      "label": "第 3 期（下午班）",
+      "start_at": "2026-11-28T03:07:55Z",
+      "end_at": "2026-11-28T06:07:55Z",
+      "room_name": "A-1 培训室",
+      "seats_remaining": 18,
+      "waitlist_count": 2,
+      "signup_state": "can_signup"
+    },
+    {
+      "session_id": "00000000-0000-0000-0000-000000000835",
+      "label": "第 3 期（周末班）",
+      "start_at": "2026-12-01T03:07:55Z",
+      "end_at": "2026-12-01T06:07:55Z",
+      "room_name": "A-2 培训室",
+      "seats_remaining": 15,
+      "waitlist_count": 0,
+      "signup_state": "can_signup"
+    },
+    {
+      "session_id": "00000000-0000-0000-0000-000000000836",
+      "label": "第 4 期（晚班）",
+      "start_at": "2026-12-05T03:07:55Z",
+      "end_at": "2026-12-05T06:07:55Z",
+      "room_name": "A-3 培训室",
+      "seats_remaining": 0,
+      "waitlist_count": 7,
+      "signup_state": "can_signup"
+    }
+  ],
+  "instructors": [
+    {
+      "instructor_id": "00000000-0000-0000-0000-000000000bb9",
+      "display_name": "陈砚舟",
+      "headline": "产线数字化顾问",
+      "bio": "主导过 20 条产线的数据采集改造。",
+      "avatar_url": "https://cdn.example.invalid/avatars/3001.png",
+      "role": "instructor",
+      "show_company_card": true,
+      "company_card": {
+        "short_name": "云枢科技",
+        "industry": "工业软件",
+        "ability_tags": [
+          "MES 实施",
+          "产线数字化",
+          "数据采集",
+          "工艺建模",
+          "培训交付"
+        ],
+        "summary": "为离散制造企业提供产线数字化改造与工艺建模服务。"
+      }
+    },
+    {
+      "instructor_id": "00000000-0000-0000-0000-000000000bba",
+      "display_name": "林知遥",
+      "headline": "精益生产讲师",
+      "bio": "十年精益改善与班组建设经验。",
+      "avatar_url": "https://cdn.example.invalid/avatars/3002.png",
+      "role": "guest",
+      "show_company_card": false
+    }
+  ],
+  "review_summary": {
+    "visible_count": 4,
+    "overall_avg": 4.5,
+    "avg_content": 4.5,
+    "avg_instructor": 4.5,
+    "avg_service": 3.5,
+    "recent": [
+      {
+        "content": "课程节奏紧凑，采集点位那节课直接给了清单模板。",
+        "rating": 5,
+        "created_at": "2026-11-24T03:07:55Z",
+        "author_name": "匿名学员"
+      },
+      {
+        "content": "老师回答很细，晚班时间对上班族友好。",
+        "rating": 4,
+        "created_at": "2026-11-23T03:07:55Z",
+        "author_name": "王工"
+      },
+      {
+        "content": "把自家产线的报表带过去，现场就改出来了。",
+        "rating": 5,
+        "created_at": "2026-11-22T03:07:55Z",
+        "author_name": "匿名学员"
+      }
+    ]
+  },
+  "remaining": 0
+}
+
+### AC4 offline course
+GET /api/mini/academy/courses/00000000-0000-0000-0000-0000000003ea   (X-Mini-Token: demo-member-token)
+HTTP 404
+{
+  "detail": "course not found"
+}
+
+### AC4 draft course
+GET /api/mini/academy/courses/00000000-0000-0000-0000-0000000003eb   (X-Mini-Token: demo-member-token)
+HTTP 404
+{
+  "detail": "course not found"
+}
+
+### AC4 soft-deleted course
+GET /api/mini/academy/courses/00000000-0000-0000-0000-0000000003ec   (X-Mini-Token: demo-member-token)
+HTTP 404
+{
+  "detail": "course not found"
+}
+
+### AC4 unknown id
+GET /api/mini/academy/courses/00000000-0000-0000-0000-0000000000ff   (X-Mini-Token: demo-member-token)
+HTTP 404
+{
+  "detail": "course not found"
+}
+
+### healthz
+GET /api/mini/academy/healthz   (no token)
+HTTP 200
+{
+  "status": "ok",
+  "module": "academy"
+}

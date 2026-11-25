@@ -1,0 +1,23 @@
+# 讲师企业能力卡用例数据：raw 为 CRM 原始返回（夹带联系方式，必须被丢弃），
+# expected_tags 为裁剪后 ability_tags 的期望值（最多 5 个）。
+- crm_company_id: crm-org-001
+  show_company_card: true
+  raw:
+    short_name: 云枢科技
+    industry: 工业软件
+    ability_tags: [MES 实施, 产线数字化, 数据采集, 工艺建模, 培训交付, 溢出标签]
+    summary: 为离散制造企业提供产线数字化改造与工艺建模服务。
+    contact_name: 不应出现的联系人
+    contact_phone: 000-0000-0000
+  expected_short_name: 云枢科技
+  expected_tags: [MES 实施, 产线数字化, 数据采集, 工艺建模, 培训交付]
+- crm_company_id: crm-org-002
+  show_company_card: false
+  raw:
+    short_name: 衡远咨询
+    industry: 管理咨询
+    ability_tags: [组织诊断, 薪酬体系]
+    summary: 面向中型企业提供组织与人才体系咨询服务。
+    contact_email: example@example.invalid
+  expected_short_name: 衡远咨询
+  expected_tags: [组织诊断, 薪酬体系]

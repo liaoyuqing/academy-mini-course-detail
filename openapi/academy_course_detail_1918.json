@@ -1,0 +1,561 @@
+{
+  "components": {
+    "schemas": {
+      "AcademyCourseDetail": {
+        "additionalProperties": false,
+        "properties": {
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "course_id": {
+            "title": "Course Id",
+            "type": "string"
+          },
+          "cover_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cover Url"
+          },
+          "fee_mode": {
+            "enum": [
+              "free",
+              "paid",
+              "entitlement"
+            ],
+            "title": "Fee Mode",
+            "type": "string"
+          },
+          "instructors": {
+            "items": {
+              "$ref": "#/components/schemas/InstructorItem"
+            },
+            "title": "Instructors",
+            "type": "array"
+          },
+          "intro": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Intro"
+          },
+          "outcomes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "outline": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Outline",
+            "type": "array"
+          },
+          "remaining": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "当前用户权益余额（分）。仅 fee_mode=entitlement 时存在",
+            "title": "Remaining"
+          },
+          "review_summary": {
+            "$ref": "#/components/schemas/ReviewSummary"
+          },
+          "sessions": {
+            "items": {
+              "$ref": "#/components/schemas/SessionItem"
+            },
+            "title": "Sessions",
+            "type": "array"
+          },
+          "subtitle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtitle"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "course_id",
+          "title",
+          "fee_mode",
+          "review_summary"
+        ],
+        "title": "AcademyCourseDetail",
+        "type": "object"
+      },
+      "CompanyCard": {
+        "additionalProperties": false,
+        "description": "企业能力卡摘要。只保留四项公开信息，联系方式一律不进入本 schema。",
+        "properties": {
+          "ability_tags": {
+            "description": "能力供给标签，最多 5 个",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 5,
+            "title": "Ability Tags",
+            "type": "array"
+          },
+          "industry": {
+            "description": "所属行业",
+            "title": "Industry",
+            "type": "string"
+          },
+          "short_name": {
+            "description": "企业简称",
+            "title": "Short Name",
+            "type": "string"
+          },
+          "summary": {
+            "description": "一句话简介",
+            "title": "Summary",
+            "type": "string"
+          }
+        },
+        "required": [
+          "short_name",
+          "industry",
+          "summary"
+        ],
+        "title": "CompanyCard",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "InstructorItem": {
+        "additionalProperties": false,
+        "properties": {
+          "avatar_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Avatar Url"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio"
+          },
+          "company_card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CompanyCard"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "仅当 show_company_card=true 时存在；false 时该键不出现在响应中"
+          },
+          "display_name": {
+            "title": "Display Name",
+            "type": "string"
+          },
+          "headline": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Headline"
+          },
+          "instructor_id": {
+            "title": "Instructor Id",
+            "type": "string"
+          },
+          "role": {
+            "description": "主讲 / 助教 / 嘉宾等",
+            "title": "Role",
+            "type": "string"
+          },
+          "show_company_card": {
+            "description": "是否展示企业能力卡",
+            "title": "Show Company Card",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "instructor_id",
+          "display_name",
+          "role",
+          "show_company_card"
+        ],
+        "title": "InstructorItem",
+        "type": "object"
+      },
+      "ReviewItem": {
+        "additionalProperties": false,
+        "description": "评价条目。匿名评价的 author_name 固定为「匿名学员」，本 schema 不含 contact_id。",
+        "properties": {
+          "author_name": {
+            "title": "Author Name",
+            "type": "string"
+          },
+          "content": {
+            "title": "Content",
+            "type": "string"
+          },
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "rating": {
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Rating",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "content",
+          "rating",
+          "created_at",
+          "author_name"
+        ],
+        "title": "ReviewItem",
+        "type": "object"
+      },
+      "ReviewSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "avg_content": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "内容分项均分",
+            "title": "Avg Content"
+          },
+          "avg_instructor": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "讲师分项均分",
+            "title": "Avg Instructor"
+          },
+          "avg_service": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "服务分项均分",
+            "title": "Avg Service"
+          },
+          "overall_avg": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "总体均分，一位小数",
+            "title": "Overall Avg"
+          },
+          "recent": {
+            "description": "最近 3 条 visible 评价",
+            "items": {
+              "$ref": "#/components/schemas/ReviewItem"
+            },
+            "title": "Recent",
+            "type": "array"
+          },
+          "visible_count": {
+            "description": "visible 评价数",
+            "minimum": 0.0,
+            "title": "Visible Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "visible_count"
+        ],
+        "title": "ReviewSummary",
+        "type": "object"
+      },
+      "SessionItem": {
+        "additionalProperties": false,
+        "properties": {
+          "end_at": {
+            "description": "ISO8601 UTC，带 Z",
+            "title": "End At",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "room_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Room Name"
+          },
+          "seats_remaining": {
+            "description": "剩余名额",
+            "minimum": 0.0,
+            "title": "Seats Remaining",
+            "type": "integer"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          },
+          "signup_state": {
+            "description": "报名资格校验服务给出的 12 种取值之一",
+            "enum": [
+              "can_signup",
+              "signed_up",
+              "waitlisted",
+              "waitlist_available",
+              "pending_review",
+              "need_auth",
+              "need_member",
+              "no_entitlement",
+              "not_open",
+              "closed",
+              "finished",
+              "application"
+            ],
+            "title": "Signup State",
+            "type": "string"
+          },
+          "start_at": {
+            "description": "ISO8601 UTC，带 Z",
+            "title": "Start At",
+            "type": "string"
+          },
+          "waitlist_count": {
+            "description": "候补人数",
+            "minimum": 0.0,
+            "title": "Waitlist Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "session_id",
+          "label",
+          "start_at",
+          "end_at",
+          "seats_remaining",
+          "waitlist_count",
+          "signup_state"
+        ],
+        "title": "SessionItem",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "会员空间平台 · 学院 v1 小程序课程详情接口",
+    "title": "Academy Mini API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/mini/academy/courses/{course_id}": {
+      "get": {
+        "operationId": "get_course_detail_api_mini_academy_courses__course_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "course_id",
+            "required": true,
+            "schema": {
+              "title": "Course Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcademyCourseDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "description": "课程不存在、非 published 或已软删除"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "小程序课程详情：课期、讲师与企业能力卡、评价摘要、权益余额",
+        "tags": [
+          "mini-academy"
+        ]
+      }
+    },
+    "/api/mini/academy/healthz": {
+      "get": {
+        "operationId": "healthz_api_mini_academy_healthz_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Healthz Api Mini Academy Healthz Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "学院子模块健康检查",
+        "tags": [
+          "mini-academy"
+        ]
+      }
+    }
+  }
+}

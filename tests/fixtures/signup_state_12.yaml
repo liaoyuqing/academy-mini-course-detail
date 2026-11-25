@@ -1,0 +1,39 @@
+# 12 种 signup_state 参数化数据：state 为资格校验服务返回的原始值，
+# expected 为课程详情响应 sessions[i].signup_state 的期望值（逐字相等）。
+# 数据全部虚构，仅用于接口测试。
+- state: can_signup
+  expected: can_signup
+  note: 课期未满，用户未报名，可直接报名
+- state: signed_up
+  expected: signed_up
+  note: 用户已在该课期报名成功
+- state: waitlisted
+  expected: waitlisted
+  note: 名额已满，用户已进入候补队列
+- state: waitlist_available
+  expected: waitlist_available
+  note: 名额已满但候补队列开放，用户可加入候补
+- state: pending_review
+  expected: pending_review
+  note: 报名需人工审核，当前处于待审核
+- state: need_auth
+  expected: need_auth
+  note: 小程序登录态缺失或过期，需重新登录
+- state: need_member
+  expected: need_member
+  note: 当前用户不是会员企业成员，需先完成会员绑定
+- state: no_entitlement
+  expected: no_entitlement
+  note: 权益制课程但用户权益余额不足
+- state: not_open
+  expected: not_open
+  note: 报名尚未开放（未到 signup_open_at）
+- state: closed
+  expected: closed
+  note: 报名已截止（超过 signup_deadline）
+- state: finished
+  expected: finished
+  note: 课期已结束
+- state: application
+  expected: application
+  note: 申请制课期，需提交申请材料
