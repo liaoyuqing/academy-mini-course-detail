@@ -42,6 +42,7 @@ python -m pytest -k ac4    # 4 passed   —— offline/draft/软删除/不存在
 生产部署（PostgreSQL 16）：
 
 ```bash
+pip install -r requirements-postgres.txt
 $env:DATABASE_URL="postgresql+psycopg://app_user:***@127.0.0.1:5432/academy"
 $env:APP_ENV="prod"
 alembic upgrade head
@@ -53,7 +54,7 @@ python -m uvicorn app.main:app --host 0.0.0.0 --port 8018
 | 项 | 说明 |
 | --- | --- |
 | 需要 | Python 3.11+、`requirements.txt` 里的 FastAPI / SQLAlchemy 2 / Alembic / Pydantic / PyYAML / pytest |
-| 需要（生产） | PostgreSQL 16 与可用的 `DATABASE_URL`；Redis 仅作缓存位预留，本接口无强依赖 |
+| 需要（生产） | PostgreSQL 16 与可用的 `DATABASE_URL`；驱动单独放 `requirements-postgres.txt`（`pip install -r requirements-postgres.txt`），本地演示与测试不需要 |
 | 不需要（测试与演示） | PostgreSQL、Redis、S2-CRM、S3-MINI、报名资格校验服务、任何 API Key |
 | 不需要 | npm / Node / 前端构建链；本单是纯后端 |
 | mock 的依赖 | `S2-CRM`（`app/clients/crm_client.py`）、报名资格校验服务（`app/clients/enrollment_check.py`）、`S3-MINI` 登录态（`app/clients/mini_client.py`） |
