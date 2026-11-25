@@ -12,3 +12,6 @@ venv/
 htmlcov/
 .coverage
 logs/*.tmp
+# 本地验证日志（clean 克隆复核用），不属于工程源码
+/verify-logs/
+/clean/

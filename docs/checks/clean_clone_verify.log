@@ -1,0 +1,21 @@
+﻿### clean clone verification
+generated: 2026-11-25T11:13:31.6433965+08:00
+clone path: E:\AI接单\Clawhunt-3\delivery\work\1918\clean
+
+## step 1: pip install -r requirements.txt
+EXIT=0
+## step 2: python -m pytest
+EXIT=0
+................................                                         [100%]
+32 passed in 0.72s
+
+## step 3: python scripts/export_openapi.py
+EXIT=0
+wrote openapi\academy_course_detail_1918.json (14869 bytes)
+components=8 paths=2
+
+## step 4: python scripts/seed_demo.py (sqlite)
+EXIT=0
+seeded course 00000000-0000-0000-0000-0000000003e9 with 4 sessions, 2 instructors, 5 reviews
+seeded 3 non-published courses for 404 acceptance
+
