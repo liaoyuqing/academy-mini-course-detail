@@ -1,21 +1,34 @@
-﻿### clean clone verification
-generated: 2026-11-25T11:13:31.6433965+08:00
-clone path: E:\AI接单\Clawhunt-3\delivery\work\1918\clean
+### clean clone verification (fresh clone of HEAD)
+clone source: E:\AI接单\Clawhunt-3\delivery\work\1918
+clone target: E:\AI接单\Clawhunt-3\delivery\work\1918\clean
 
-## step 1: pip install -r requirements.txt
+## step 1: python -m pip install -r requirements.txt
 EXIT=0
+[notice] A new release of pip is available: 24.0 -> 26.3
+
+[notice] To update, run: python.exe -m pip install --upgrade pip
+
+
+
 ## step 2: python -m pytest
 EXIT=0
 ................................                                         [100%]
-32 passed in 0.72s
+32 passed in 0.69s
 
 ## step 3: python scripts/export_openapi.py
 EXIT=0
 wrote openapi\academy_course_detail_1918.json (14869 bytes)
 components=8 paths=2
 
-## step 4: python scripts/seed_demo.py (sqlite)
+## step 4: seed + serve smoke check (sqlite)
 EXIT=0
 seeded course 00000000-0000-0000-0000-0000000003e9 with 4 sessions, 2 instructors, 5 reviews
 seeded 3 non-published courses for 404 acceptance
 
+## step 5: live smoke check against the clean clone (uvicorn 127.0.0.1:8021, sqlite)
+published course: HTTP 200 sessions=3 instructors=2 company_card_keys=1 remaining=128000
+offline course: HTTP 404
+draft course: HTTP 404
+soft-deleted course: HTTP 404
+unknown id: HTTP 404
+SUMMARY EXITS: pip=0 pytest=0 openapi=0 seed=0 smoke=200/404-as-expected
